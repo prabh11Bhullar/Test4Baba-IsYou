@@ -12,7 +12,15 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var baba : SKSpriteNode!
     let PLAYER_SPEED:CGFloat = 50
-
+    var flag:SKSpriteNode!
+    var wallBlock : SKSpriteNode!
+    var babaXPosition : CGFloat!
+    var babaYPosition : CGFloat!
+    var flagBlock : SKSpriteNode!
+    var isBlock : SKSpriteNode!
+    var winBlock : SKSpriteNode!
+    var stopBlock : SKSpriteNode!
+    var activeStatus=false
 
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
