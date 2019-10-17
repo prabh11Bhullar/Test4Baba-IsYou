@@ -10,9 +10,15 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    var baba : SKSpriteNode!
+    let PLAYER_SPEED:CGFloat = 50
+
 
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
+        
+        self.baba = self.childNode(withName: "baba") as? SKSpriteNode
+        let moveAction=SKAction.moveTo(x:-400,duration:7)
     }
    
     func didBegin(_ contact: SKPhysicsContact) {
@@ -24,11 +30,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let mouseTouch=touches.first
+        if(mouseTouch==nil)
+        {
+            return
+        }
+        
+        //figure wt node did when touches the player
+        let location=mouseTouch!.location(in: self)
+        let nodeTouched = atPoint(location).name
+        print("player touched\(nodeTouched)")
+        //game logic
+        if(nodeTouched=="upbutton")
+        {
+            self.baba.position.y=self.baba.position.y+PLAYER_SPEED
+        }
+        else if(nodeTouched=="downbutton")
+        {
+            self.baba.position.y=self.baba.position.y-PLAYER_SPEED
+        }
+        else if(nodeTouched=="leftbutton")
+        {
+            self.baba.position.x=self.baba.position.x-PLAYER_SPEED
+        }
+        else if(nodeTouched=="rightbutton")
+        {
+            self.baba.position.x=self.baba.position.x+PLAYER_SPEED
+        }
+        
+    
+    
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        
     }
 }
