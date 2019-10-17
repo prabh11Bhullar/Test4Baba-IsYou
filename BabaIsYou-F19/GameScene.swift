@@ -21,12 +21,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var winBlock : SKSpriteNode!
     var stopBlock : SKSpriteNode!
     var activeStatus=false
-
+    var wall:SKSpriteNode!
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
         
         self.baba = self.childNode(withName: "baba") as? SKSpriteNode
-        let moveAction=SKAction.moveTo(x:-400,duration:5)
+        self.baba.physicsBody?.categoryBitMask = 4
+        
+        self.wall = self.childNode(withName: "wall") as? SKSpriteNode
+        self.wall.physicsBody?.categoryBitMask = 2
+        
+        self.flag = self.childNode(withName: "flag") as? SKSpriteNode
+        self.flag.physicsBody?.categoryBitMask = 8
+        
+        self.wallBlock = self.childNode(withName: "wallBlock") as? SKSpriteNode
+        self.wallBlock.physicsBody?.categoryBitMask = 64
+        
+        self.flagBlock = self.childNode(withName: "flagBlock") as? SKSpriteNode
+        self.flagBlock.physicsBody?.categoryBitMask = 32
+        
+        self.stopBlock = self.childNode(withName: "stopBlock") as? SKSpriteNode
+        self.stopBlock.physicsBody?.categoryBitMask = 128
+        
+        self.winBlock = self.childNode(withName: "winBlock") as? SKSpriteNode
+        self.winBlock.physicsBody?.categoryBitMask = 256
+        
+        self.isBlock = self.childNode(withName: "isBlock") as? SKSpriteNode
+        self.isBlock.physicsBody?.categoryBitMask = 512
     }
    
     func didBegin(_ contact: SKPhysicsContact) {
