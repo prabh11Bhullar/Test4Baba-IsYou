@@ -18,7 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         
         self.baba = self.childNode(withName: "baba") as? SKSpriteNode
-        let moveAction=SKAction.moveTo(x:-400,duration:7)
+        let moveAction=SKAction.moveTo(x:-400,duration:5)
     }
    
     func didBegin(_ contact: SKPhysicsContact) {
