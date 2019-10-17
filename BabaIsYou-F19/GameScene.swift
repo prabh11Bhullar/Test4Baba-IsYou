@@ -20,6 +20,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isBlock : SKSpriteNode!
     var winBlock : SKSpriteNode!
     var stopBlock : SKSpriteNode!
+    
+    
     var activeStatus=false
     var wall:SKSpriteNode!
     override func didMove(to view: SKView) {
