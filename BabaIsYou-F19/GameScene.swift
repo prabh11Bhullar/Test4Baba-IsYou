@@ -54,6 +54,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
    
     func didBegin(_ contact: SKPhysicsContact) {
         print("Something collided!")
+        let node1 = contact.bodyA.node
+        let node2 = contact.bodyB.node
+        
+        if node1 == nil || node2 == nil{
+            return
+        }
+        
+      blockDetection()
+        if(activeStatus == false)
+        {
+            if node1!.name == "baba" && node2!.name == "wall"
+            {
+                self.baba.physicsBody?.collisionBitMask = 4
+                self.wall.physicsBody?.affectedByGravity = false
+                self.wall.physicsBody!.isDynamic = false
+            }
+                
+            else if(node1!.name == "wall" && node2!.name == "baba"){
+                self.baba.physicsBody?.collisionBitMask = 4
+                self.wall.physicsBody?.affectedByGravity = false
+                self.wall.physicsBody!.isDynamic = false
+            }
+        }
+        
+        
+        if node1!.name == "baba" && node2!.name == "flag"
+        {
+            print("you Won game")
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -100,4 +129,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
     }
+    func blockDetection(){
+        if(self.wallBlock.position.y == self.isBlock.position.y){
+            if(self.wallBlock.position.y == self.stopBlock.position.y){
+                activeStatus = false
+            }
+        }
+        else
+            if((self.flag.position.y == self.isBlock.position.y)){
+                if(self.flag.position.y == self.stopBlock.position.y){
+                    activeStatus = false
+                }
+                
+            }
+            else if(self.flagBlock.position.y == self.isBlock.position.y){
+                if(self.flagBlock.position.y == self.winBlock.position.y){
+                    activeStatus = true
+                }
+                else
+                    if(self.wallBlock.position.y == self.isBlock.position.y){
+                        if(self.wallBlock.position.y == self.winBlock.position.y){
+                            activeStatus = true
+                        }
+                        
+                }
+}
+}
+
 }
